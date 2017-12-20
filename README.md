@@ -1,4 +1,4 @@
-# SAFE - A web stack designed for developer happiness
+# RabbitMQ + Hopac + SAFE - A web stack designed for developer happiness
 
 This is a clone of the above, showcasing how RabbitMQ can be used with Hopac as a message
 bus, for idempotent publishes from a Suave web API.
