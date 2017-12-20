@@ -1,5 +1,14 @@
 # SAFE - A web stack designed for developer happiness
 
+This is a clone of the above, showcasing how RabbitMQ can be used with Hopac as a message
+bus, for idempotent publishes from a Suave web API.
+
+This commit is where this sample gets interesting:
+
+https://github.com/haf/rmq-publisher-confirms-hopac/commit/486839bc0c7e8f6099d0b2a5df08a0e31d7b364a
+
+---
+
 The following document describes the [SAFE-Stack](https://safe-stack.github.io/) sample project.
 SAFE is a technology stack that brings together several technologies into a single, coherent stack for typesafe,
 flexible end-to-end web-enabled applications that are written entirely in F#.
