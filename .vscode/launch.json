@@ -13,17 +13,6 @@
             "console": "internalConsole"
         },
         {
-            "name": "Debug Azure",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "Build Server",
-            "program": "${workspaceRoot}/src/Server/bin/Debug/netcoreapp2.0/Server.dll",
-            "args": ["${workspaceRoot}/src/Client", "AzureConnection=UseDevelopmentStorage=true" ],
-            "cwd": "${workspaceRoot}",
-            "stopAtEntry": false,
-            "console": "internalConsole"
-        },
-        {
             "name": "Debug Server Test",
             "type": "coreclr",
             "request": "launch",

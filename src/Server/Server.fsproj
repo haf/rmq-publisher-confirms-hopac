@@ -6,6 +6,7 @@
   <ItemGroup>
     <Compile Include="Shared/Domain.fs" />
     <Compile Include="Shared/ServerUrls.fs" />
+    <Compile Include="Shared/RabbitMQ.fs" />
     <Compile Include="ServerTypes.fs" />
     <Compile Include="JsonWebToken.fs" />
     <Compile Include="FableJson.fs" />

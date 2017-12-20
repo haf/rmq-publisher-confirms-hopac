@@ -312,12 +312,6 @@ testCase "login with test user" <| fun () ->
 
 The deployment for this repo works via [docker](https://www.docker.com/) and therefore you need docker installed on your machine.
 
-### Microsoft Azure
-
-The following part shows how to set up automatic deployment to [Microsoft Azure](https://azure.microsoft.com).
-
-![Auto Deployment to Azure](https://user-images.githubusercontent.com/57396/30860733-740e509c-a2c8-11e7-88c6-0341c4beab38.gif)
-
 #### Docker Hub
 
 Create a new [Docker Hub](https://hub.docker.com) account and a new public repository on Docker Hub.
@@ -342,37 +336,6 @@ Don't worry the file is already in `.gitignore` so your password will not be com
 
 In order to release a container you need to create a new entry in [RELEASE_NOTES.md] and run `release.cmd`.
 This will build the server and client, run all test, put the app into a docker container and push it to your docker hub repro.
-
-#### Azure Portal
-
-Go to the [Azure Portal](https://portal.azure.com) and create a new "Web App for Containers".
-Configure the Web App to point to the docker repo and select `latest` channel of the container.
-
-![Docker setup](https://user-images.githubusercontent.com/57396/31279587-e06001d0-aaa9-11e7-9b4b-a3e8278a6419.png)
-
-Also look for the "WebHook Url" on the portal, copy that url and set it as new trigger in your Docker Hub repo.
-
-*Note that entering a Startup File is not necessary.*
-
-The `Dockerfile` used to create the docker image exposes port 8085 for the Suave server application. This port needs to be mapped to port 80 within the Azure App Service for the application to receive http traffic.
-
-Presently this can only be done using the Azure CLI. You can do this easily in Azure Cloud Shell (accessible from the Azure Portal in the top menu bar) using the following command:
-
-`az webapp config appsettings set --resource-group <resource group name> --name <web app name> --settings WEBSITES_PORT=8085`
-
-The above command is effectively the same as running `docker run -p 80:8085 <image name>`.
-
-Now you should be able to reach the website on your `.azurewebsites.net` url.
-
-#### Further releases
-
-Now everything is set up. By creating new entries in [RELEASE_NOTES.md] and a new run of `release.cmd` the website should update automatically.
-
-#### Azure Storage
-
-With the steps above the website is only using local file storage. If you want to use it together with Azure Storage, then go back to the [Azure Portal](https://portal.azure.com) and create a new "Storage account". Copy the Connection String from "Access keys" tab and move over to your Azure app service.
-
-![Storage Account](https://user-images.githubusercontent.com/57396/31279525-a15fe1f8-aaa9-11e7-9639-f04021a1ab49.png)
 
 ### Google Cloud AppEngine
 

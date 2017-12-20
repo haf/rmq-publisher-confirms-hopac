@@ -9,6 +9,8 @@ open Suave.Filters
 open Suave.Operators
 open Suave.RequestErrors
 open ServerCode
+open Suave.ServerErrors
+open Suave.Successful
 
 /// Start the web server and connect to database
 let start databaseType clientPath port =
@@ -27,6 +29,9 @@ let start databaseType clientPath port =
         logger.logSimple (Message.event LogLevel.Info (sprintf "Using database %O" databaseType))
         Database.getDatabase databaseType startupTime
 
+    let rmq =
+      RabbitMQ.createSimple ()
+
     let app =
         choose [
             GET >=> choose [
@@ -38,6 +43,18 @@ let start databaseType clientPath port =
             POST >=> choose [
                 path ServerUrls.Login >=> Auth.login
                 path ServerUrls.WishList >=> WishList.postWishList db.SaveWishList
+
+                // Sample RMQ
+                path "/sample/rmq" >=> fun ctx -> async {
+                  let mid = System.Guid.NewGuid()
+                  let m = [ { RabbitMQ.Message.id = mid; RabbitMQ.Message.data = "Hello"B } ]
+                  let! res = RabbitMQ.publishAsync rmq m
+                  match res with
+                  | RabbitMQ.FailureClientShouldRetry ->
+                    return! SERVICE_UNAVAILABLE "Retry, please..." ctx
+                  | RabbitMQ.Successful ->
+                    return! ACCEPTED "Thank you." ctx
+                }
             ]
 
             NOT_FOUND "Page not found."

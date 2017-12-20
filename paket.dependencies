@@ -1,6 +1,8 @@
 source https://nuget.org/api/v2
 storage:none
 
+nuget Hopac
+nuget RabbitMQ.Client
 nuget FSharp.Core redirects: force
 nuget Fable.JsonConverter
 nuget Suave
@@ -14,9 +16,6 @@ nuget Fable.Elmish.Browser
 nuget Fable.Elmish.Debugger
 nuget Fable.Elmish.React
 nuget Fable.Elmish.HMR
-nuget WindowsAzure.Storage
-nuget Microsoft.Azure.WebJobs prerelease
-nuget Microsoft.Azure.WebJobs.Extensions prerelease
 
 clitool dotnet-fable
 clitool Microsoft.DotNet.Watcher.Tools
