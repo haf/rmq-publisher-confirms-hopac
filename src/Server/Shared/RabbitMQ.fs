@@ -90,7 +90,7 @@ module Impl =
     // https://www.rabbitmq.com/blog/2011/02/10/introducing-publisher-confirms/ says:
     // Thirdly, if the connection between the publisher and broker drops with outstanding confirms, it does not necessarily mean that the messages were lost, so republishing may result in duplicate messages.
     model.BasicRecoverOk.Add(printfn "BasicRecoverOk: %A")
-    model.BasicNacks.Add(Stream.Src.value reconnected >> start)
+    model.BasicRecoverOk.Add(Stream.Src.value reconnected >> start)
 
     model.BasicReturn.Add(printfn "BasicReturn: %A")
     model.FlowControl.Add(printfn "FlowControl: %A")
